@@ -1,0 +1,125 @@
+# Feature Engineering Configuration
+# Defines all factors used in the alpha engine
+
+# Value Factors
+value:
+  book_to_market:
+    description: "Book value divided by market capitalization"
+    calculation: "book_value / market_cap"
+  earnings_yield:
+    description: "Earnings per share divided by price"
+    calculation: "eps / price"
+  sales_to_price:
+    description: "Sales per share divided by price"
+    calculation: "sales_per_share / price"
+  cashflow_to_price:
+    description: "Cash flow per share divided by price"
+    calculation: "cf_per_share / price"
+  dividend_yield:
+    description: "Dividends per share divided by price"
+    calculation: "dividends_per_share / price"
+
+# Momentum Factors
+momentum:
+  momentum_12_1:
+    description: "12-month return excluding last month"
+    calculation: "ret_252d / ret_21d - 1"
+  momentum_6_1:
+    description: "6-month return excluding last month"
+    calculation: "ret_126d / ret_21d - 1"
+  short_term_reversal:
+    description: "Previous month return (reversal factor)"
+    calculation: "ret_21d"
+  price_trend:
+    description: "Linear regression slope of prices over 3 months"
+    calculation: "linregress_slope(prices, 63d)"
+
+# Quality Factors
+quality:
+  roe:
+    description: "Return on equity"
+    calculation: "net_income / shareholders_equity"
+  roa:
+    description: "Return on assets"
+    calculation: "net_income / total_assets"
+  profit_margin:
+    description: "Net profit margin"
+    calculation: "net_income / revenue"
+  debt_to_equity:
+    description: "Total debt to equity ratio"
+    calculation: "total_debt / shareholders_equity"
+  current_ratio:
+    description: "Current assets to current liabilities"
+    calculation: "current_assets / current_liabilities"
+  accruals:
+    description: "Total accruals scaled by assets"
+    calculation: "(net_income - operating_cash_flow) / total_assets"
+
+# Size Factor
+size:
+  market_cap:
+    description: "Market capitalization"
+    calculation: "shares_outstanding * price"
+  log_market_cap:
+    description: "Natural log of market cap"
+    calculation: "log(market_cap)"
+
+# Liquidity Factors
+liquidity:
+  turnover:
+    description: "Average daily turnover over 21 days"
+    calculation: "mean(volume * price, 21d) / market_cap"
+  amihud_illiquidity:
+    description: "Amihud illiquidity measure"
+    calculation: "mean(abs(returns) / dollar_volume, 21d)"
+  bid_ask_spread:
+    description: "Relative bid-ask spread"
+    calculation: "(ask - bid) / midpoint"
+
+# Volatility Factors
+volatility:
+  realized_vol_21d:
+    description: "21-day realized volatility"
+    calculation: "std(returns, 21d) * sqrt(252)"
+  realized_vol_63d:
+    description: "63-day realized volatility"
+    calculation: "std(returns, 63d) * sqrt(252)"
+  vol_of_vol:
+    description: "Volatility of volatility"
+    calculation: "std(rolling_vol_21d, 63d)"
+
+# Technical Factors
+technical:
+  rsi_14:
+    description: "14-day Relative Strength Index"
+    calculation: "talib.RSI(close, 14)"
+  macd_signal:
+    description: "MACD signal line"
+    calculation: "talib.MACD(close)[2]"
+  bollinger_position:
+    description: "Position within Bollinger Bands"
+    calculation: "(price - bb_lower) / (bb_upper - bb_lower)"
+  price_to_sma:
+    description: "Price relative to 20-day simple moving average"
+    calculation: "price / sma_20d"
+
+# Risk Factors
+risk:
+  beta:
+    description: "Market beta over 252 days"
+    calculation: "cov(returns, market_returns) / var(market_returns)"
+  idiosyncratic_vol:
+    description: "Residual volatility from market model"
+    calculation: "std(returns - beta * market_returns)"
+    
+# Analyst Factors (if available)
+analyst:
+  analyst_revisions:
+    description: "Earnings estimate revisions"
+    calculation: "current_estimate / prior_estimate - 1"
+
+# Macro Sensitivity
+macro:
+  yield_sensitivity:
+    description: "Sensitivity to 10Y treasury yield changes"
+    calculation: "rolling_beta(returns, yield_changes, 63d)"

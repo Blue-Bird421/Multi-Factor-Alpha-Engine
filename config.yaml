@@ -1,0 +1,46 @@
+backtest:
+  end_date: '2024-06-30'
+  initial_capital: 1000000.0
+  rebalance_freq: M
+  start_date: '2005-01-01'
+data:
+  data_path: data/raw/
+  end_date: '2024-12-31'
+  start_date: '2000-01-01'
+  universe: sp1500
+features:
+  lookback_periods:
+  - 21
+  - 63
+  - 126
+  - 252
+  zscore_window: 252
+models:
+  neural_network:
+    batch_size: 256
+    dropout_rate: 0.2
+    epochs: 100
+    hidden_layers:
+    - 64
+    - 32
+    learning_rate: 0.001
+  ridge:
+    alpha: 1.0
+    fit_intercept: true
+  xgboost:
+    learning_rate: 0.1
+    max_depth: 6
+    n_estimators: 100
+    random_state: 42
+output:
+  generate_tearsheet: true
+  plots_path: plots/
+  reports_path: reports/
+  results_path: results/
+  save_weights: true
+portfolio:
+  kelly_fraction: 0.5
+  kelly_lookback: 126
+  max_position_weight: 0.01
+  max_sector_weight: 0.1
+  signal_blend: equal
