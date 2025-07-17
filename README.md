@@ -17,7 +17,7 @@ This project implements a comprehensive **Multi-Factor Equity Alpha Engine** tha
 - 📋 Backtests strategies with comprehensive performance analysis
 - 📊 Generates professional QuantStats tearsheets and visualizations
 
-**Target Performance**: 13% CAGR, 1.3 Sharpe ratio vs S&P 1500 benchmark (7% CAGR, 0.6 Sharpe)
+**Target Performance**: 13% CAGR, 0.9 Sharpe ratio vs S&P 1500 benchmark (7% CAGR, 0.6 Sharpe)
 
 ## 🚀 Quick Start
 
@@ -262,9 +262,7 @@ Based on academic factor research, the engine targets:
 | Metric | Alpha Engine | S&P 1500 Benchmark |
 |--------|-------------|-------------------|
 | CAGR | 13% | 7% |
-| Sharpe Ratio | 1.3 | 0.6 |
-| Max Drawdown | -15% | -25% |
-| Hit Rate | 55% | 50% |
+| Sharpe Ratio | 0.9 | 0.6 |
 
 *Results may vary based on market conditions and implementation details*
 
@@ -298,32 +296,7 @@ Based on academic factor research, the engine targets:
 - [ ] Options overlay strategies
 - [ ] ESG factor integration
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
-
-- Factor definitions based on academic research from Fama-French, AQR, and others
-- Built with modern Python ecosystem and best practices
-- Inspired by institutional quantitative research methodologies
-
-## 📞 Contact
-
-For questions, suggestions, or collaboration opportunities:
-
-- **Email**: [your-email@domain.com]
-- **LinkedIn**: [Your LinkedIn Profile]
-- **GitHub**: [Your GitHub Profile]
-
----
-
-**⚡ Built for quantitative finance professionals and researchers seeking production-ready factor modeling infrastructure.**
